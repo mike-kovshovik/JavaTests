@@ -11,157 +11,93 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import junit.framework.Assert;
+import by.onliner.pages.*;
 
 
 public class ClassToPerfomChecks {
 	
 	public static void main(String[] args) throws InterruptedException {
-	
+		
+		
 		String driverPath = "drivers/chromedriver";
 		System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, driverPath);
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().fullscreen();
-		
+				
+		WebDriverWait wait = new WebDriverWait(driver, 5);
 		
 		// 1. Opens www.onliner.by
 		driver.navigate().to("http://onliner.by");
 		
 		
-		// 2. Navigate to catalog
-		WebDriverWait wait = new WebDriverWait(driver, 10);
-		WebElement catalogLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Каталог")));
-		catalogLink.click();
+		//2. Navigate to catalog
+		OnlinerHomePage OnlinerLandingPage = new OnlinerHomePage(driver);
+		OnlinerLandingPage.clickCatalogLink();
 		
 		
 		// 3. Select beauty and sport section
-		WebElement beauty_and_sport_link = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='container']//span[contains(text(), 'Красота')]")));
-		beauty_and_sport_link.click();
-	
+		CatalogOnliner OnlinerCatalog = new CatalogOnliner(driver);
+		OnlinerCatalog.clickBeautyAndSport();
+		
 		
 		// 4. Select Hobby from the left-side menu
-		WebElement hobby_link = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='container']//div[contains(text(), 'Хобби')]")));
-		hobby_link.click();
+		OnlinerCatalog.clickHobby();
 		
 		
 		// 5. Select radio_control models
-		WebElement radio_control_models_link = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='container']//span[contains(text(), 'Радиоуправляемые авиамодели')]")));
-		radio_control_models_link.click();
-	
+		OnlinerCatalog.clickRadioControlAirModels();
+		
 		
 		// 6. Assert Radio header
-		WebElement radiocontrol_air_model_header = driver.findElement(By.className("schema-header__title"));
-		Assert.assertEquals("Радиоуправляемые авиамодели", radiocontrol_air_model_header.getText());
+		Radiocontrolair radiocontrolAirPage = new Radiocontrolair(driver);
+		radiocontrolAirPage.verifyRadioControlModelsHeader();
 		
 		
 		// 7. Select Type = Quadcopter
-		String xpath = "//div[@id='schema-filter']//span[text()='%s']";
-		WebElement quadcopter_checkbox = driver.findElement(By.xpath(String.format(xpath, "квадрокоптер")));
-		
-		JavascriptExecutor jse = (JavascriptExecutor)driver;
-		jse.executeScript("window.scrollBy(0," + quadcopter_checkbox.getLocation().y + ")"); // scrolling down the page by 1459 pixels until Additional Parameters link text is displayed
-		
-		// jse.executeScript("window.scrollBy(0,1459)", ""); // scrolling down the page by 1459 pixels until Additional Parameters link text is displayed
-		
-		// quadcopter_parameter_checkbox
-		
-		WebElement quadcopter_checkbox1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(xpath, "квадрокоптер"))));
-		//WebElement quadcopter_checkbox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='schema-filter']//span[text()='квадрокоптер']")));
-		quadcopter_checkbox1.click();
-		
+		radiocontrolAirPage.selectQuadrocopterCheckbox();
+				
 
 		// 8. Select Body = Plastic and Metall
-		WebElement plastic_checkbox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(xpath, "пластик"))));
-		//WebElement plastic_checkbox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='schema-filter']//span[text()='пластик']")));
-		plastic_checkbox.click();		
-
-		WebElement metal_checkbox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(xpath, "металл"))));
-		//WebElement metal_checkbox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='schema-filter']//span[text()='металл']")));
-		metal_checkbox.click();		
-
+		radiocontrolAirPage.selectBodyTypePlasticCheckbox();
+		radiocontrolAirPage.selectBodyTypeMetalCheckbox();
+		
 		
 		// 9. Specify range
-		//WebElement range_checkbox = driver.findElement(By.xpath("//div[@class='schema-filter__group']/div[@class='schema-filter-control schema-filter-control_input']/input[@placeholder='6']"));
-		WebElement range_checkbox = driver.findElement(By.xpath("//input[@placeholder='6']"));
-		range_checkbox.sendKeys("100");
+		radiocontrolAirPage.specifyRangeOfAction("100");
 		
-		
+
 		// 10. Open additional parameters
-		WebElement additional_parameters_button = driver.findElement(By.linkText("Дополнительные параметры"));
-		additional_parameters_button.click();
-		//System.out.println(additional_parameters_button.getLocation());
-		
-		
-		jse.executeScript("window.scrollBy(0,260)", ""); // scrolling down the page by 260 pixels until Beskollektornyi checkbox is visible
-		
+		radiocontrolAirPage.clickAdditionalParameters();
+
 		
 		// 11. Select engine type = Beskollektornyi
-		WebElement engine_type_beskollektornyi_checkbox = driver.findElement(By.xpath(String.format(xpath, "бесколлекторный")));
-		engine_type_beskollektornyi_checkbox.click();
-		//System.out.println(engine_type_beskollektornyi_checkbox.getLocation());
+		radiocontrolAirPage.checkEngineTypeBeskollektornyi();
 		
 		
 		// 12. Verify 20 mathes were found
-		WebElement number_of_items_found_link = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='schema-filter-button']//span[starts-with(text(), 'Найдено 20')]")));
-		Assert.assertEquals("Найдено 20 товаров", number_of_items_found_link.getText());
-		
+		radiocontrolAirPage.verifyNumberOfFoundItemsIsCorrect("Найдено 20 товаров");
+
 		
 		// 13. Change sort order. Cheap should go first
-		jse.executeScript("window.scrollBy(0,-1719)", ""); // scrolling the page to the top
+		radiocontrolAirPage.changeSortOrderCheapGoFirst();
 		
-		WebElement sort_order_icon = driver.findElement(By.xpath("//span[@class='schema-order__text']"));
-		sort_order_icon.click();
-	
-		WebElement cheap_sort_item_from_dropdown = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='schema-order']//span[text()='Дешевые']")));
-		cheap_sort_item_from_dropdown.click();
 		
         // 14. Проверить что цена товара для результата < цены товара для результата 2 в списке			
+		radiocontrolAirPage.verifySortOrderIsCorrectCheapGoFirst();
+		
+		System.out.println("It works!");
 		
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("It works again");
 		
-		WebElement first_price = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id=\"schema-products\"]/div[1]//div[@class=\"schema-product__price\"]/a/span")));
-		WebElement second_price = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id=\"schema-products\"]/div[2]//div[@class=\"schema-product__line\"]//a/span")));
-
+		driver.quit();
 		
-		
-		// Formatting the first product
-	    String min_formatted = "";
-		
-	    for (int i = 0; i < first_price.getText().length(); i++){
-	      char c = first_price.getText().charAt(i);    
-	      String cs = String.valueOf(c);
-	        if(c == ' ') {
-	          break;
-	        }
-	      min_formatted = min_formatted.concat(cs);
-	    }
-	    double value_min = Double.parseDouble(min_formatted.replace(",","."));
-	    
-	    // String some = "50.00 р.";
-	    // String array[]= some.split(" ");
-	    // System.out.println(array[0]);
-
-	    // Formatting the second product
-		String max_formatted = "";
-	    for (int i = 0; i < second_price.getText().length(); i++){
-	      char b = second_price.getText().charAt(i);    
-	      String cs1 = String.valueOf(b);
-	        if(b == ' ') {
-	          break;
-	        }
-	      max_formatted = max_formatted.concat(cs1);
-	    }
-	    double value_max = Double.parseDouble(max_formatted.replace(",","."));
-		
-	    // to verify the first product on the list is cheaper than the second product
-	    Assert.assertTrue(value_min <= value_max);
-		
-	    
-	    
+		    
 	    // 15.Пометить 1,3,5 и 6 товары для добавления в сравнение
 	    String xpathListOfCheckboxesToCompare = "//div[@id='schema-products']/div[%s]//span[@class='i-checkbox__faux']";
 	   

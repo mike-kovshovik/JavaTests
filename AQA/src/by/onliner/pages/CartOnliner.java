@@ -3,10 +3,16 @@
  */
 package by.onliner.pages;
 
+import org.openqa.selenium.WebDriver;
 /**
  * @author michaelkovshovik
  *
  */
-public class CartOnliner {
 
+public class CartOnliner
+{
+	WebDriver driver;
+	
+	
+	
 }
