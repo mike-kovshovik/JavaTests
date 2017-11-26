@@ -85,6 +85,14 @@ public class ClassToPerfomChecks {
         // 14. Проверить что цена товара для результата < цены товара для результата 2 в списке			
 		radiocontrolAirPage.verifySortOrderIsCorrectCheapGoFirst();
 		
+	    
+	    // 15.Пометить 1,3,5 и 6 товары для добавления в сравнение
+		radiocontrolAirPage.checkFirstQuadroCheckbox();
+		radiocontrolAirPage.checkThirdQuadroCheckbox();
+		radiocontrolAirPage.checkFifthsQuadroCheckbox();
+		radiocontrolAirPage.checkSixthsQuadroCheckbox();
+		
+		
 		System.out.println("It works!");
 		
 		try {
@@ -97,9 +105,9 @@ public class ClassToPerfomChecks {
 		
 		driver.quit();
 		
-		    
-	    // 15.Пометить 1,3,5 и 6 товары для добавления в сравнение
-	    String xpathListOfCheckboxesToCompare = "//div[@id='schema-products']/div[%s]//span[@class='i-checkbox__faux']";
+		
+		/*
+		String xpathListOfCheckboxesToCompare = "//div[@id='schema-products']/div[%s]//span[@class='i-checkbox__faux']";
 	   
 	    WebElement firstQuadroCheckbox = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(xpathListOfCheckboxesToCompare, 1))));
 	    // WebElement firstQuadroCheckbox = driver.findElement(By.xpath(String.format(xpathListOfCheckboxesToCompare, 1)));
@@ -115,7 +123,7 @@ public class ClassToPerfomChecks {
 	    WebElement sixthsQuadroCheckbox = driver.findElement(By.xpath(String.format(xpathListOfCheckboxesToCompare, 7)));
 	    sixthsQuadroCheckbox.click();	    
 	    
-	    
+	    */
 	    // 16.Проверить, что появился стикер с "4 товара в сравнении"
 	    WebElement FourItemsToCompareLabel = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='compare-button-container']//a[@class='compare-button__sub compare-button__sub_main']")));
 	    Assert.assertEquals("4 товара в сравнении", FourItemsToCompareLabel.getText());

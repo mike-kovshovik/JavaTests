@@ -13,6 +13,7 @@ public class Radiocontrolair
 	WebDriver driver;
 	String radioControlHeader = "Радиоуправляемые авиамодели";
 	String xpathForQuadroParameters = "//div[@id='schema-filter']//span[text()='%s']";
+	String xpathListOfCheckboxesToCompare = "//div[@id='schema-products']/div[%s]//span[@class='i-checkbox__faux']";
 	By radiocontrolAirModelHeader = By.className("schema-header__title");
 	By quadrocopterCheckbox = By.xpath(String.format(xpathForQuadroParameters, "квадрокоптер"));
 	By quadrocopterBodyTypePlastic = By.xpath(String.format(xpathForQuadroParameters, "пластик"));
@@ -25,6 +26,10 @@ public class Radiocontrolair
 	By sortOrderDropDowOptionCheap = By.xpath("//div[@id='schema-order']//span[text()='Дешевые']");
 	By firstPrice = By.xpath("//div[@id=\"schema-products\"]/div[1]//div[@class=\"schema-product__price\"]/a/span");
 	By secondPrice = By.xpath("//div[@id=\"schema-products\"]/div[2]//div[@class=\"schema-product__line\"]//a/span");
+	By firstCheckbox = By.xpath(String.format(xpathListOfCheckboxesToCompare, 1));
+	By thirdCheckbox = By.xpath(String.format(xpathListOfCheckboxesToCompare, 4));
+	By fifthsCheckbox = By.xpath(String.format(xpathListOfCheckboxesToCompare, 6));
+	By sixthsCheckbox = By.xpath(String.format(xpathListOfCheckboxesToCompare, 7));
 	
 
 	public Radiocontrolair(WebDriver driver)
@@ -141,10 +146,35 @@ public class Radiocontrolair
 		
 	    // to verify the first product on the list is cheaper than the second product
 	    Assert.assertTrue(value_min <= value_max);
-		
-		
 	}
 	
+	
+	public void checkFirstQuadroCheckbox ()
+	{
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(firstCheckbox)).click();
+	}
+	
+	
+	public void checkThirdQuadroCheckbox ()
+	{
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(thirdCheckbox)).click();
+	}
+	
+	
+	public void checkFifthsQuadroCheckbox ()
+	{
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(fifthsCheckbox)).click();
+	}
+	
+	
+	public void checkSixthsQuadroCheckbox ()
+	{
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(sixthsCheckbox)).click();
+	}
 	
 }
 
