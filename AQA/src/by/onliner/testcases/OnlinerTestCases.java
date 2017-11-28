@@ -129,6 +129,7 @@ public class OnlinerTestCases{
         // 26.Проверить что логин попап появился
 	  	cartOnliner.assertLoginToSitePopupAppeared();
        
+	  	
 		driver.quit();
 		
 	}
