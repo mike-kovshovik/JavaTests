@@ -2,9 +2,7 @@ package by.onliner.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
@@ -14,18 +12,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class OnlinerHomePage
 {
 	WebDriver driver;
+	WebDriverWait wait;
+	
 	
 	By catalogLink = By.linkText("Каталог");
 	
 	
-	public OnlinerHomePage(WebDriver driver)
+	public OnlinerHomePage(WebDriver driver, WebDriverWait wait)
 	{
 		this.driver=driver;
+		this.wait=wait;
 	}
 	
 	public void clickCatalogLink()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 5);
 		wait.until(ExpectedConditions.elementToBeClickable(catalogLink));
 		driver.findElement(catalogLink).click();
 	}

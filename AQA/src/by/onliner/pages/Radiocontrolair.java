@@ -11,6 +11,8 @@ import junit.framework.Assert;
 public class Radiocontrolair
 {
 	WebDriver driver;
+	WebDriverWait wait;
+	
 	String radioControlHeader = "Радиоуправляемые авиамодели";
 	String xpathForQuadroParameters = "//div[@id='schema-filter']//span[text()='%s']";
 	String xpathListOfCheckboxesToCompare = "//div[@id='schema-products']/div[%s]//span[@class='i-checkbox__faux']";
@@ -30,17 +32,18 @@ public class Radiocontrolair
 	By thirdCheckbox = By.xpath(String.format(xpathListOfCheckboxesToCompare, 4));
 	By fifthsCheckbox = By.xpath(String.format(xpathListOfCheckboxesToCompare, 6));
 	By sixthsCheckbox = By.xpath(String.format(xpathListOfCheckboxesToCompare, 7));
+	By numberOfItemsToCompare = By.xpath("//div[@id='compare-button-container']//a[@class='compare-button__sub compare-button__sub_main']");
 	
 
-	public Radiocontrolair(WebDriver driver)
+	public Radiocontrolair(WebDriver driver, WebDriverWait wait)
 	{
 		this.driver = driver;
+		this.wait = wait;
 	}
 	
 	
 	public void verifyRadioControlModelsHeader()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(radiocontrolAirModelHeader));
 		String actualHeader = driver.findElement(radiocontrolAirModelHeader).getText();
 		Assert.assertEquals(actualHeader, radioControlHeader);	
@@ -49,7 +52,6 @@ public class Radiocontrolair
 	
 	public void selectQuadrocopterCheckbox()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		driver.findElement(quadrocopterCheckbox);
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		WebElement quadrocopterCheckboxElement = driver.findElement(quadrocopterCheckbox);
@@ -60,42 +62,39 @@ public class Radiocontrolair
 	
 	public void selectBodyTypePlasticCheckbox()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(quadrocopterBodyTypePlastic)).click();
 	}
 
 	
 	public void selectBodyTypeMetalCheckbox() 
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(quadrocopterBodyTypeMetal)).click();
 	}
 	
 	
 	public void specifyRangeOfAction(String range) 
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(rangeOfAction)).sendKeys(range);
 	}
 	
 	
 	public void clickAdditionalParameters() 
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(additionalParametersLink)).click();;
 	}
 	
 	
 	public void checkEngineTypeBeskollektornyi() 
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		WebElement engineTypeBeskollektornyiElement = driver.findElement(engineTypeBeskollektornyi);
+		jse.executeScript("window.scrollBy(0," + engineTypeBeskollektornyiElement.getLocation().y + ")");
 		wait.until(ExpectedConditions.elementToBeClickable(engineTypeBeskollektornyi)).click();
 	}
 	
 	
 	public void verifyNumberOfFoundItemsIsCorrect(String numberOfTheFoundItems) 
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(numberOfItemsFound));
 		String actualNumberOfFoundItems = driver.findElement(numberOfItemsFound).getText();
 		Assert.assertEquals(actualNumberOfFoundItems, numberOfTheFoundItems);	
@@ -104,7 +103,6 @@ public class Radiocontrolair
 	
 	public void changeSortOrderCheapGoFirst() 
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(sortOrderIcon)).click();
 		wait.until(ExpectedConditions.elementToBeClickable(sortOrderDropDowOptionCheap)).click();	
 	}
@@ -112,7 +110,6 @@ public class Radiocontrolair
 	
 	public void verifySortOrderIsCorrectCheapGoFirst() 
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(firstPrice));
 		
 		// Formatting the first product
@@ -151,29 +148,37 @@ public class Radiocontrolair
 	
 	public void checkFirstQuadroCheckbox ()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(firstCheckbox)).click();
 	}
 	
 	
 	public void checkThirdQuadroCheckbox ()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(thirdCheckbox)).click();
 	}
 	
 	
 	public void checkFifthsQuadroCheckbox ()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(fifthsCheckbox)).click();
 	}
 	
 	
 	public void checkSixthsQuadroCheckbox ()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(sixthsCheckbox)).click();
+	}
+	
+	
+	public void checkNumberOfItemsToCompare(String expectedText)
+	{
+		wait.until(ExpectedConditions.visibilityOfElementLocated(numberOfItemsToCompare));
+		Assert.assertEquals(expectedText, driver.findElement(numberOfItemsToCompare).getText());
+	}
+	
+	public void clickOnNumberOfItemsToCompare()
+	{
+		wait.until(ExpectedConditions.elementToBeClickable(numberOfItemsToCompare)).click();
 	}
 	
 }

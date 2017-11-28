@@ -9,32 +9,31 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class CatalogOnliner
 {
 	WebDriver driver;
+	WebDriverWait wait;
 	
 	By beautyAndSportLink = By.xpath("//*[@id='container']//span[contains(text(), 'Красота')]");
 	By hobbyMenuItemLink = By.xpath("//*[@id='container']//div[contains(text(), 'Хобби')]");
 	By radioControlAirModelsLink = By.xpath("//div[@id='container']//span[contains(text(), 'Радиоуправляемые авиамодели')]");
 	
 	
-	public CatalogOnliner(WebDriver driver)
+	public CatalogOnliner(WebDriver driver, WebDriverWait wait)
 	{
 		this.driver=driver;
+		this.wait=wait;
 	}
 	
 	public void clickBeautyAndSport()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(beautyAndSportLink)).click();
 	}
 	
 	public void clickHobby()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(hobbyMenuItemLink)).click();
 	}
 	
 	public void clickRadioControlAirModels()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(radioControlAirModelsLink)).click();
 	}
 	
