@@ -5,17 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-/**
- * @author michaelkovshovik
- *
- */
+
 public class OnlinerHomePage
 {
-	WebDriver driver;
-	WebDriverWait wait;
+	private WebDriver driver;
+	private WebDriverWait wait;
 	
 	
-	By catalogLink = By.linkText("Каталог");
+	private final By catalogLink = By.linkText("Каталог");
 	
 	
 	public OnlinerHomePage(WebDriver driver, WebDriverWait wait)

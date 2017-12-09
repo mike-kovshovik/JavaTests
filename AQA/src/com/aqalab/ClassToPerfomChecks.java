@@ -42,7 +42,7 @@ public class ClassToPerfomChecks {
 		
 		// 6. Assert Radio header
 		Radiocontrolair radiocontrolAirPage = new Radiocontrolair(driver, wait);
-		radiocontrolAirPage.verifyRadioControlModelsHeader();
+		radiocontrolAirPage.verifyIsPageHeaderEqualTo("Радиоуправляемые авиамодели");
 		
 		
 		// 7. Select Type = Quadcopter
@@ -75,14 +75,14 @@ public class ClassToPerfomChecks {
 		
 		
         // 14. Проверить что цена товара для результата < цены товара для результата 2 в списке			
-		radiocontrolAirPage.verifySortOrderIsCorrectCheapGoFirst();
+		//radiocontrolAirPage.verifySortOrderIsCorrectCheapGoFirst();
 		
 	    
 	    // 15.Пометить 1,3,5 и 6 товары для добавления в сравнение
-		radiocontrolAirPage.checkFirstQuadroCheckbox();
-		radiocontrolAirPage.checkThirdQuadroCheckbox();
-		radiocontrolAirPage.checkFifthsQuadroCheckbox();
-		radiocontrolAirPage.checkSixthsQuadroCheckbox();
+		//radiocontrolAirPage.checkFirstQuadroCheckbox();
+		//radiocontrolAirPage.checkThirdQuadroCheckbox();
+		//radiocontrolAirPage.checkFifthsQuadroCheckbox();
+		//radiocontrolAirPage.checkSixthsQuadroCheckbox();
 		
 		
 	    // 16.Проверить, что появился стикер с "4 товара в сравнении"
@@ -99,8 +99,8 @@ public class ClassToPerfomChecks {
 	   
 	    
 	    // 19.Проверить что присутствуют изначально выбранные параметры (квадрокоптер,пластик или металл,бесколлекторный)
-	    QuadroHubsanDetails quadroHubsanDetails = new QuadroHubsanDetails(driver, wait);
-	    quadroHubsanDetails.verifyInitiallySelectedParametersAreCorrect();
+	    ItemDetailsPage quadroHubsanDetails = new ItemDetailsPage(driver, wait);
+	    //quadroHubsanDetails.verifyInitiallySelectedParametersAreCorrect();
 		
 	    
 	    // 20.Добавить в корзину

@@ -3,34 +3,42 @@ package by.onliner.testcases;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import by.onliner.pages.*;
-import by.onliner.testData.*;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import by.onliner.pages.CartOnliner;
+import by.onliner.pages.CatalogOnliner;
+import by.onliner.pages.CompareItems;
+import by.onliner.pages.ItemDetailsPage;
+import by.onliner.pages.OnlinerHomePage;
+import by.onliner.pages.Radiocontrolair;
+import by.onliner.testData.TestData;
 
-
-public class OnlinerTestCases{
+public class NewTestNGTest {
 	
-	public static void main(String[] args) throws InterruptedException {
+	public WebDriver driver;
+	public WebDriverWait wait;
 
-		
-		// initializing webdriver and wait object
+	@BeforeTest
+	public void beforeTest()
+	{
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
-		WebDriver driver = new ChromeDriver();
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		driver = new ChromeDriver();
+		wait = new WebDriverWait(driver, 10);
 		driver.manage().window().fullscreen();
-				
-		
+	}	
+	
+	
+	@Test
+	public void e2eOnlinerCatalogTest()
+	{
 		// 1. Opens www.onliner.by
 		driver.navigate().to("http://onliner.by");
-		
 		
 		//2. Navigate to catalog
 		OnlinerHomePage onlinerLandingPage = new OnlinerHomePage(driver, wait);
 		onlinerLandingPage.clickCatalogLink();
-		
-		
+	
 		// 3. Select beauty and sport section
 		// 4. Select Hobby from the left-side menu
 		// 5. Select radio_control models
@@ -117,13 +125,13 @@ public class OnlinerTestCases{
 	  	
         // 26.Проверить что логин попап появился
 	  	cartOnliner.assertLoginToSitePopupAppeared();
-       
-	  	
-		driver.quit();
-		
+
 	}
+
+	@AfterTest
+	public void afterTest()
+	{	
+		driver.quit();
+	}
+
 }
-
-
-
-
