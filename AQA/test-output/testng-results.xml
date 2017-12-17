@@ -2,20 +2,20 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="41172" started-at="2017-12-09T10:00:46Z" finished-at="2017-12-09T10:01:27Z">
+  <suite name="Default suite" duration-ms="45364" started-at="2017-12-16T19:43:27Z" finished-at="2017-12-16T19:44:12Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="41172" started-at="2017-12-09T10:00:46Z" finished-at="2017-12-09T10:01:27Z">
+    <test name="Default test" duration-ms="45364" started-at="2017-12-16T19:43:27Z" finished-at="2017-12-16T19:44:12Z">
       <class name="by.onliner.testcases.NewTestNGTest">
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:by.onliner.testcases.NewTestNGTest@1b604f19]" name="beforeTest" is-config="true" duration-ms="3803" started-at="2017-12-09T13:00:46Z" finished-at="2017-12-09T13:00:49Z">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:by.onliner.testcases.NewTestNGTest@1e127982]" name="beforeTest" is-config="true" duration-ms="9140" started-at="2017-12-16T22:43:27Z" finished-at="2017-12-16T22:43:36Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="e2eOnlinerCatalogTest()[pri:0, instance:by.onliner.testcases.NewTestNGTest@1b604f19]" name="e2eOnlinerCatalogTest" duration-ms="36778" started-at="2017-12-09T13:00:49Z" finished-at="2017-12-09T13:01:26Z">
+        <test-method status="PASS" signature="e2eOnlinerCatalogTest()[pri:0, instance:by.onliner.testcases.NewTestNGTest@1e127982]" name="e2eOnlinerCatalogTest" duration-ms="35681" started-at="2017-12-16T22:43:36Z" finished-at="2017-12-16T22:44:12Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- e2eOnlinerCatalogTest -->
-        <test-method status="PASS" signature="afterTest()[pri:0, instance:by.onliner.testcases.NewTestNGTest@1b604f19]" name="afterTest" is-config="true" duration-ms="562" started-at="2017-12-09T13:01:26Z" finished-at="2017-12-09T13:01:27Z">
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:by.onliner.testcases.NewTestNGTest@1e127982]" name="afterTest" is-config="true" duration-ms="507" started-at="2017-12-16T22:44:12Z" finished-at="2017-12-16T22:44:12Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterTest -->

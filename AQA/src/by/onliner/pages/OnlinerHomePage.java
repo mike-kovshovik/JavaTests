@@ -12,7 +12,7 @@ public class OnlinerHomePage
 	private WebDriverWait wait;
 	
 	
-	private final By catalogLink = By.linkText("Каталог");
+	private static final By catalogLink = By.linkText("Каталог");
 	
 	
 	public OnlinerHomePage(WebDriver driver, WebDriverWait wait)
@@ -21,10 +21,11 @@ public class OnlinerHomePage
 		this.wait=wait;
 	}
 	
-	public void clickCatalogLink()
+	public OnlinerCatalogPage clickCatalogLink()
 	{
 		wait.until(ExpectedConditions.elementToBeClickable(catalogLink));
 		driver.findElement(catalogLink).click();
+		return new OnlinerCatalogPage(driver, wait);
 	}
 
 }

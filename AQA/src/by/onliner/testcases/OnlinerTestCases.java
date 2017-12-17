@@ -1,54 +1,67 @@
 package by.onliner.testcases;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import by.onliner.pages.*;
 import by.onliner.testData.*;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.AfterTest;
+
 
 
 public class OnlinerTestCases{
 	
 	public static void main(String[] args) throws InterruptedException {
-
+		
+		Logger logger = Logger.getLogger("OnlinerTestCases");
+		//PropertyConfigurator.configure("log4j.properties");
+		
 		
 		// initializing webdriver and wait object
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
 		WebDriver driver = new ChromeDriver();
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		driver.manage().window().fullscreen();
+		logger.info("Initialized driver and opened a full screen window");
 				
 		
 		// 1. Opens www.onliner.by
 		driver.navigate().to("http://onliner.by");
+		logger.info("opened Onliner.by");
 		
 		
 		//2. Navigate to catalog
 		OnlinerHomePage onlinerLandingPage = new OnlinerHomePage(driver, wait);
 		onlinerLandingPage.clickCatalogLink();
+		logger.info("Opened catalog");
 		
 		
 		// 3. Select beauty and sport section
 		// 4. Select Hobby from the left-side menu
 		// 5. Select radio_control models
-		CatalogOnliner OnlinerCatalog = new CatalogOnliner(driver, wait);
-		OnlinerCatalog.clickBeautyAndSport().clickHobby().clickRadioControlAirModels();
+		OnlinerCatalogPage OnlinerCatalog = new OnlinerCatalogPage(driver, wait);
+		//OnlinerCatalog.clickBeautyAndSport().clickHobby().clickRadioControlAirModels();
+		
+		logger.debug("selected Красота и спорт, clicked Hobby, selected RadioAirModels");
+		logger.warn("selected Красота и спорт, clicked Hobby, selected RadioAirModels");
 		
 		// 6. Assert Radio header
-		Radiocontrolair radiocontrolAirPage = new Radiocontrolair(driver, wait);
+		QuadrokoptersPage radiocontrolAirPage = new QuadrokoptersPage(driver, wait);
 		radiocontrolAirPage.verifyIsPageHeaderEqualTo("Радиоуправляемые авиамодели");
+		logger.error("Verified page header is Радиоуправляемые авиамодели");
+		
 		
 		
 		// 7. Select Type = Quadcopter
 		// 8. Select Body = Plastic and Metall
 		radiocontrolAirPage.selectQuadrocopterCheckbox().selectBodyTypePlasticCheckbox().selectBodyTypeMetalCheckbox();
+		logger.error("Some text");
 		
 		
 		// 9. Specify range
 		radiocontrolAirPage.specifyRangeOfAction("100");
+		logger.fatal("Fatal message");
 		
 
 		// 10. Open additional parameters
@@ -82,12 +95,12 @@ public class OnlinerTestCases{
 
 	    
 	    // 18.Открыть товар 3
-	    CompareItems compareItemsPage = new CompareItems(driver, wait); 
-	    compareItemsPage.clickThirdItemInComparisonTable();
+	    CompareItemsPage compareItemsPage = new CompareItemsPage(driver, wait); 
+	    //compareItemsPage.selectItemFromComparisonTable();
 	   
 	    
 	    // 19.Проверить что присутствуют изначально выбранные параметры (квадрокоптер,пластик или металл,бесколлекторный)
-	    ItemDetailsPage detailsPage = new ItemDetailsPage(driver, wait);
+	    ProductDetailsPage detailsPage = new ProductDetailsPage(driver, wait);
 		detailsPage.verifyInitiallySelectedParametersAreCorrect(testdata.initiallySelectedParameters);
 	    
 	    // 20.Добавить в корзину
@@ -103,7 +116,7 @@ public class OnlinerTestCases{
 	   
 	    
 	    // 23.Добавить +1 товар (нажать +)
-	  	CartOnliner cartOnliner = new CartOnliner(driver, wait);
+	  	OnlinerCartPage cartOnliner = new OnlinerCartPage(driver, wait);
 	  	cartOnliner.addPlusOneItem();
 	   
 		
