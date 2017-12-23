@@ -1,6 +1,5 @@
 package by.onliner.testcases;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,6 +9,7 @@ import org.testng.annotations.Test;
 import by.onliner.pages.OnlinerCatalogPage;
 import by.onliner.pages.CompareItemsPage;
 import by.onliner.pages.OnlinerHomePage;
+import by.onliner.pages.QuadrokoptersPage;
 import by.onliner.testData.TestData;
 
 
@@ -23,7 +23,7 @@ public class NewTestNGTest {
 	{
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
 		driver = new ChromeDriver();
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 15);
 		driver.manage().window().fullscreen();
 		driver.navigate().to("http://onliner.by");		
 	}	
@@ -38,18 +38,21 @@ public class NewTestNGTest {
 			.selectCatalogTopMenuItem(OnlinerCatalogPage.beautyAndSportLink)
 			.selectLeftMenuItem(OnlinerCatalogPage.hobbyMenuItemLink)
 			.selectCategoryFromGrid(OnlinerCatalogPage.radioControlAirModelsLink)
-			.verifyIsPageHeaderEqualTo("Радиоуправляемые авиамодели")  // 6. Assert Radio header
-			.selectQuadrocopterCheckbox()  // 7. Select Type = Quadcopter
-			.selectBodyTypePlasticCheckbox()   // 8. Select Body = Plastic and Metall
-			.selectBodyTypeMetalCheckbox()
+			.verifyIsPageHeaderEqualTo(TestData.radiocontrolAirPageHeader)  // 6. Assert Radio header
+			.setParameter(TestData.quadrocopter)
+			.setParameter(TestData.plastic)
+			.setParameter(TestData.metal)
+			//.selectQuadrocopterCheckbox()  // 7. Select Type = Quadcopter
+			//.selectBodyTypePlasticCheckbox()   // 8. Select Body = Plastic and Metall
+			//.selectBodyTypeMetalCheckbox()
 			.specifyRangeOfAction(TestData.RANGE) // 9. Specify range
 			.clickAdditionalParameters()  // 10. Open additional parameters
 			.checkEngineTypeBeskollektornyi()  // 11. Select engine type = Beskollektornyi
-			.verifyNumberOfFoundItemsIsCorrect("Найдено 27 товаров")    //12. Verify 27 mathes were found
+			.verifyNumberOfFoundItemsIsCorrect(TestData.numberOfItemsFound)    //12. Verify 27 mathes were found
 			.changeSortOrderCheapGoFirst()  // 13. Change sort order. Cheap should go first
 			.verifyIsPriceSortedDesc()    // 14. Проверить что цена товара для результата < цены товара для результата 2 в списке			
 			.selectItemsToCompare(TestData.indexesOfCheckboxes)  // 15.Пометить 1,3,5 и 6 товары для добавления в сравнение
-			.checkNumberOfItemsToCompare("4 товара в сравнении")  // 16.Проверить, что появился стикер с "4 товара в сравнении"
+			.checkNumberOfItemsToCompare(TestData.numberOfItemsToCompare)  // 16.Проверить, что появился стикер с "4 товара в сравнении"
 			.clickOnNumberOfItemsToCompare()   // 17.Перейти в сравнение (кликнуть на стикер)
 			.selectItemFromComparisonTable(CompareItemsPage.thirdItemInComparisonTable)  // 18.Открыть товар 3
 			.verifyInitiallySelectedParametersAreCorrect(TestData.initiallySelectedParameters)  // 19.Проверить что присутствуют изначально выбранные параметры

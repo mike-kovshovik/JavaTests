@@ -55,7 +55,7 @@ public class OnlinerTestCases{
 		
 		// 7. Select Type = Quadcopter
 		// 8. Select Body = Plastic and Metall
-		radiocontrolAirPage.selectQuadrocopterCheckbox().selectBodyTypePlasticCheckbox().selectBodyTypeMetalCheckbox();
+		//radiocontrolAirPage.selectQuadrocopterCheckbox().selectBodyTypePlasticCheckbox().selectBodyTypeMetalCheckbox();
 		logger.error("Some text");
 		
 		

@@ -26,6 +26,7 @@ public class OnlinerCatalogPage
 	
 	public OnlinerCatalogPage selectCatalogTopMenuItem(By topMenuItem)
 	{
+		log.info("[Step] select top menu item from Onliner Catalog");
 		wait.until(ExpectedConditions.elementToBeClickable(topMenuItem)).click();
 		return this;
 	}
@@ -33,6 +34,7 @@ public class OnlinerCatalogPage
 	
 	public OnlinerCatalogPage selectLeftMenuItem(By leftMenuItem)
 	{
+		log.info("[Step] select left side menu item from Onliner Catalog");
 		wait.until(ExpectedConditions.elementToBeClickable(leftMenuItem)).click();
 		return this;
 	}
