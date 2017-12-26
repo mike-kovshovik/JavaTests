@@ -18,15 +18,10 @@ public class QuadrokoptersPage {
 	private WebDriverWait wait;
 
 	private static final String xpathForQuadroParameters = "//div[@id='schema-filter']//span[text()='%s']";
-	//private static final By xpathForQuadroParameters = By.xpath("//div[@id='schema-filter']//span[text()='%s']");
 	private static final String xpathListOfCheckboxesToCompare = "//div[@id='schema-products']/div[%s]//span[@class='i-checkbox__faux']";
 	private static final By radiocontrolAirModelHeader = By.className("schema-header__title");
-	//private static final By quadrocopterCheckbox = By.xpath(String.format(xpathForQuadroParameters, "квадрокоптер"));
-	//private static final By quadrocopterBodyTypePlastic = By.xpath(String.format(xpathForQuadroParameters, "пластик"));
-	//private static final By quadrocopterBodyTypeMetal = By.xpath(String.format(xpathForQuadroParameters, "металл"));
 	private static final By rangeOfAction = By.xpath("//input[@placeholder='6']");
 	private static final By additionalParametersLink = By.linkText("Дополнительные параметры");
-	private static final By engineTypeBeskollektornyi = By.xpath(String.format(xpathForQuadroParameters, "бесколлекторный"));
 	private static final By numberOfItemsFound = By.xpath("//div[@id='schema-filter-button']//span[starts-with(text(), 'Найдено 27')]");
 	private static final By sortOrderIcon = By.xpath("//span[@class='schema-order__text']");
 	private static final By sortOrderDropDowOptionCheap = By.xpath("//div[@id='schema-order']//span[text()='Дешевые']");
@@ -54,32 +49,10 @@ public class QuadrokoptersPage {
 		jse.executeScript("window.scrollBy(0,"
 				+ driver.findElement(By.xpath(String.format(xpathForQuadroParameters, parameterName))).getLocation().y
 				+ ")");
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(String.format(xpathForQuadroParameters, parameterName))))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(String.format(xpathForQuadroParameters, parameterName))))).click();
 		return this;
 	}
 
-	/*
-	 * public QuadrokoptersPage selectQuadrocopterCheckbox() {
-	 * log.info("[Step] select quadrokopter checkbox"); JavascriptExecutor jse =
-	 * (JavascriptExecutor) driver; WebElement quadrocopterCheckboxElement =
-	 * driver.findElement(quadrocopterCheckbox);
-	 * jse.executeScript("window.scrollBy(0," +
-	 * quadrocopterCheckboxElement.getLocation().y + ")");
-	 * wait.until(ExpectedConditions.elementToBeClickable(quadrocopterCheckbox)).
-	 * click(); return this; }
-	
-
-	public QuadrokoptersPage selectBodyTypePlasticCheckbox() {
-		wait.until(ExpectedConditions.elementToBeClickable(quadrocopterBodyTypePlastic)).click();
-		return this;
-	}
-
-	public QuadrokoptersPage selectBodyTypeMetalCheckbox() {
-		wait.until(ExpectedConditions.elementToBeClickable(quadrocopterBodyTypeMetal)).click();
-		return this;
-	}
-	
-	 */
 
 	public QuadrokoptersPage specifyRangeOfAction(String range) {
 		wait.until(ExpectedConditions.elementToBeClickable(rangeOfAction)).sendKeys(range);
@@ -88,14 +61,6 @@ public class QuadrokoptersPage {
 
 	public QuadrokoptersPage clickAdditionalParameters() {
 		wait.until(ExpectedConditions.elementToBeClickable(additionalParametersLink)).click();
-		return this;
-	}
-
-	public QuadrokoptersPage checkEngineTypeBeskollektornyi() {
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		WebElement engineTypeBeskollektornyiElement = driver.findElement(engineTypeBeskollektornyi);
-		jse.executeScript("window.scrollBy(0," + engineTypeBeskollektornyiElement.getLocation().y + ")");
-		wait.until(ExpectedConditions.elementToBeClickable(engineTypeBeskollektornyi)).click();
 		return this;
 	}
 

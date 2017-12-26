@@ -38,21 +38,18 @@ public class NewTestNGTest {
 			.selectCatalogTopMenuItem(OnlinerCatalogPage.beautyAndSportLink)
 			.selectLeftMenuItem(OnlinerCatalogPage.hobbyMenuItemLink)
 			.selectCategoryFromGrid(OnlinerCatalogPage.radioControlAirModelsLink)
-			.verifyIsPageHeaderEqualTo(TestData.radiocontrolAirPageHeader)  // 6. Assert Radio header
-			.setParameter(TestData.quadrocopter)
-			.setParameter(TestData.plastic)
-			.setParameter(TestData.metal)
-			//.selectQuadrocopterCheckbox()  // 7. Select Type = Quadcopter
-			//.selectBodyTypePlasticCheckbox()   // 8. Select Body = Plastic and Metall
-			//.selectBodyTypeMetalCheckbox()
-			.specifyRangeOfAction(TestData.RANGE) // 9. Specify range
-			.clickAdditionalParameters()  // 10. Open additional parameters
-			.checkEngineTypeBeskollektornyi()  // 11. Select engine type = Beskollektornyi
-			.verifyNumberOfFoundItemsIsCorrect(TestData.numberOfItemsFound)    //12. Verify 27 mathes were found
+			.verifyIsPageHeaderEqualTo("Радиоуправляемые авиамодели")  // 6. Assert Radio header
+			.setParameter("квадрокоптер")
+			.setParameter("пластик")
+			.setParameter("металл")
+			.specifyRangeOfAction("100")
+			.clickAdditionalParameters()
+			.setParameter("бесколлекторный")
+			.verifyNumberOfFoundItemsIsCorrect("Найдено 27 товаров")
 			.changeSortOrderCheapGoFirst()  // 13. Change sort order. Cheap should go first
 			.verifyIsPriceSortedDesc()    // 14. Проверить что цена товара для результата < цены товара для результата 2 в списке			
 			.selectItemsToCompare(TestData.indexesOfCheckboxes)  // 15.Пометить 1,3,5 и 6 товары для добавления в сравнение
-			.checkNumberOfItemsToCompare(TestData.numberOfItemsToCompare)  // 16.Проверить, что появился стикер с "4 товара в сравнении"
+			.checkNumberOfItemsToCompare("4 товара в сравнении")  // 16.Проверить, что появился стикер с "4 товара в сравнении"
 			.clickOnNumberOfItemsToCompare()   // 17.Перейти в сравнение (кликнуть на стикер)
 			.selectItemFromComparisonTable(CompareItemsPage.thirdItemInComparisonTable)  // 18.Открыть товар 3
 			.verifyInitiallySelectedParametersAreCorrect(TestData.initiallySelectedParameters)  // 19.Проверить что присутствуют изначально выбранные параметры

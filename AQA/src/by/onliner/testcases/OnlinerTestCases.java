@@ -66,7 +66,7 @@ public class OnlinerTestCases{
 
 		// 10. Open additional parameters
 		// 11. Select engine type = Beskollektornyi
-		radiocontrolAirPage.clickAdditionalParameters().checkEngineTypeBeskollektornyi();
+		//radiocontrolAirPage.clickAdditionalParameters().checkEngineTypeBeskollektornyi();
 
 		
 		// 12. Verify 27 mathes were found
